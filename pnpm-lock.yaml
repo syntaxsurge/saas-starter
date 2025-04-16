@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@esbuild-kit/core-utils':
+        specifier: ^3.3.2
+        version: 3.3.2
+      '@esbuild-kit/esm-loader':
+        specifier: ^2.6.5
+        version: 2.6.5
       '@radix-ui/react-avatar':
         specifier: ^1.1.3
         version: 1.1.3(@types/react-dom@19.1.1(@types/react@19.1.0))(@types/react@19.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
