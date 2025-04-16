@@ -1,20 +1,21 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import Image from "next/image";
-import ImageLightbox from "@/components/ui/image-lightbox";
+import Image from 'next/image'
+import { useState } from 'react'
+
+import ImageLightbox from '@/components/ui/image-lightbox'
 
 interface LightboxGalleryProps {
   /** Array of image URLs to display */
-  images: string[];
+  images: string[]
   /** Optional prefix for alt text in images */
-  altPrefix?: string;
+  altPrefix?: string
   /** Image width passed to next/image */
-  width?: number;
+  width?: number
   /** Image height passed to next/image */
-  height?: number;
+  height?: number
   /** Additional CSS classes for each image */
-  imageClassName?: string;
+  imageClassName?: string
 }
 
 /**
@@ -23,22 +24,22 @@ interface LightboxGalleryProps {
  */
 export default function LightboxGallery({
   images,
-  altPrefix = "lightbox-image-",
+  altPrefix = 'lightbox-image-',
   width = 400,
   height = 250,
-  imageClassName = "",
+  imageClassName = '',
 }: LightboxGalleryProps) {
-  const [open, setOpen] = useState(false);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [open, setOpen] = useState(false)
+  const [lightboxIndex, setLightboxIndex] = useState(0)
 
   function handleClick(index: number) {
-    setLightboxIndex(index);
-    setOpen(true);
+    setLightboxIndex(index)
+    setOpen(true)
   }
 
   return (
     <>
-      <div className="flex flex-wrap gap-6">
+      <div className='flex flex-wrap gap-6'>
         {images.map((src, index) => (
           <Image
             key={index}
@@ -46,7 +47,7 @@ export default function LightboxGallery({
             alt={`${altPrefix}${index}`}
             width={width}
             height={height}
-            className={`cursor-pointer rounded-md border border-border shadow-sm ${imageClassName}`}
+            className={`border-border cursor-pointer rounded-md border shadow-sm ${imageClassName}`}
             onClick={() => handleClick(index)}
           />
         ))}
@@ -59,5 +60,5 @@ export default function LightboxGallery({
         startIndex={lightboxIndex}
       />
     </>
-  );
+  )
 }

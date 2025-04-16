@@ -1,38 +1,36 @@
-import "./globals.css";
-import type { Metadata, Viewport } from "next";
-import { Manrope } from "next/font/google";
-import { UserProvider } from "@/lib/auth";
-import { getUser } from "@/lib/db/queries";
-import { ThemeProvider } from "@/components/theme-provider";
+import './globals.css'
+import { Manrope } from 'next/font/google'
+
+import type { Metadata, Viewport } from 'next'
+
+import { ThemeProvider } from '@/components/theme-provider'
+import { UserProvider } from '@/lib/auth'
+import { getUser } from '@/lib/db/queries'
 
 export const metadata: Metadata = {
-  title: "Next.js SaaS Starter",
-  description: "Get started quickly with Next.js, Postgres, and Stripe.",
-};
+  title: 'Next.js SaaS Starter',
+  description: 'Get started quickly with Next.js, Postgres, and Stripe.',
+}
 
 export const viewport: Viewport = {
   maximumScale: 1,
-};
+}
 
-const manrope = Manrope({ subsets: ["latin"] });
+const manrope = Manrope({ subsets: ['latin'] })
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  let userPromise = getUser();
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  let userPromise = getUser()
 
   return (
     <html
-      lang="en"
+      lang='en'
       className={`bg-background text-foreground ${manrope.className}`}
       suppressHydrationWarning
     >
-      <body className="min-h-[100dvh] bg-background">
+      <body className='bg-background min-h-[100dvh]'>
         <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
+          attribute='class'
+          defaultTheme='system'
           enableSystem
           disableTransitionOnChange
         >
@@ -40,5 +38,5 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }

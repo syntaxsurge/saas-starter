@@ -244,7 +244,7 @@ export default function ImageLightbox({
           exit={{ opacity: 0 }}
         >
           {/* Top-right controls */}
-          <div className='absolute right-4 top-4 z-[9999] flex items-center gap-3'>
+          <div className='absolute top-4 right-4 z-[9999] flex items-center gap-3'>
             <button
               onClick={toggleFullscreen}
               className='rounded-md bg-gray-800 p-2 text-white hover:bg-gray-700'
@@ -286,14 +286,14 @@ export default function ImageLightbox({
           {/* Navigation arrows */}
           <button
             onClick={handlePrev}
-            className='absolute left-2 top-1/2 z-[9999] -translate-y-1/2 rounded-full bg-black/50 p-3 text-white hover:bg-black/70'
+            className='absolute top-1/2 left-2 z-[9999] -translate-y-1/2 rounded-full bg-black/50 p-3 text-white hover:bg-black/70'
             aria-label='Previous image'
           >
             <ChevronLeft className='h-5 w-5' />
           </button>
           <button
             onClick={handleNext}
-            className='absolute right-2 top-1/2 z-[9999] -translate-y-1/2 rounded-full bg-black/50 p-3 text-white hover:bg-black/70'
+            className='absolute top-1/2 right-2 z-[9999] -translate-y-1/2 rounded-full bg-black/50 p-3 text-white hover:bg-black/70'
             aria-label='Next image'
           >
             <ChevronRight className='h-5 w-5' />
@@ -332,9 +332,9 @@ export default function ImageLightbox({
 }
 
 function handleImageClick(idx: number) {
-    const [open, setOpen] = useState(false)
-    const [lightboxIndex, setLightboxIndex] = useState(0)
-    
-    setLightboxIndex(idx)
-    setOpen(true)
-  }
+  const [open, setOpen] = useState(false)
+  const [lightboxIndex, setLightboxIndex] = useState(0)
+
+  setLightboxIndex(idx)
+  setOpen(true)
+}
