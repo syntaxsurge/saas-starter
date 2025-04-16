@@ -28,13 +28,6 @@ export default function SecurityPage() {
     event: React.FormEvent<HTMLFormElement>,
   ) => {
     event.preventDefault();
-    // If you call the Server Action directly, it will automatically
-    // reset the form. We don't want that here, because we want to keep the
-    // client-side values in the inputs. So instead, we use an event handler
-    // which calls the action. You must wrap direct calls with startTransition.
-    // When you use the `action` prop it automatically handles that for you.
-    // Another option here is to persist the values to local storage. I might
-    // explore alternative options.
     startTransition(() => {
       passwordAction(new FormData(event.currentTarget));
     });
@@ -51,7 +44,7 @@ export default function SecurityPage() {
 
   return (
     <section className="flex-1 p-4 lg:p-8">
-      <h1 className="text-lg lg:text-2xl font-medium bold mb-6">
+      <h1 className="text-lg lg:text-2xl font-medium mb-6">
         Security Settings
       </h1>
       <Card className="mb-8">
@@ -70,6 +63,7 @@ export default function SecurityPage() {
                 required
                 minLength={8}
                 maxLength={100}
+                placeholder="Enter current password"
               />
             </div>
             <div>
@@ -82,6 +76,7 @@ export default function SecurityPage() {
                 required
                 minLength={8}
                 maxLength={100}
+                placeholder="Enter new password"
               />
             </div>
             <div>
@@ -93,6 +88,7 @@ export default function SecurityPage() {
                 required
                 minLength={8}
                 maxLength={100}
+                placeholder="Confirm your new password"
               />
             </div>
             {passwordState.error && (
@@ -124,7 +120,7 @@ export default function SecurityPage() {
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground mb-4">
-            Account deletion is non-reversable. Please proceed with caution.
+            Account deletion is non-reversible. Please proceed with caution.
           </p>
           <form onSubmit={handleDeleteSubmit} className="space-y-4">
             <div>
@@ -136,6 +132,7 @@ export default function SecurityPage() {
                 required
                 minLength={8}
                 maxLength={100}
+                placeholder="Enter password to confirm"
               />
             </div>
             {deleteState.error && (

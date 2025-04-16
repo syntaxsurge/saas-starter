@@ -33,44 +33,53 @@ export function InviteTeamMember() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Invite Team Member</CardTitle>
+        <CardTitle className="text-lg sm:text-xl">Invite Team Member</CardTitle>
       </CardHeader>
       <CardContent>
-        <form action={inviteAction} className="space-y-4">
-          <div>
-            <Label htmlFor="email">Email</Label>
+        <form action={inviteAction} className="space-y-5">
+          <div className="flex flex-col space-y-1.5">
+            <Label htmlFor="email" className="text-sm font-medium">
+              Email
+            </Label>
             <Input
               id="email"
               name="email"
               type="email"
-              placeholder="Enter email"
+              placeholder="Enter team member's email"
               required
               disabled={!isOwner}
             />
           </div>
-          <div>
-            <Label htmlFor="role">Role</Label>
+          <div className="flex flex-col space-y-2">
+            <Label htmlFor="role" className="text-sm font-medium">
+              Role
+            </Label>
+
             <RadioGroup
               defaultValue="member"
               name="role"
-              className="flex space-x-4"
               disabled={!isOwner}
+              className="flex space-x-6"
             >
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="member" id="member" />
-                <Label htmlFor="member">Member</Label>
+                <Label htmlFor="member" className="cursor-pointer select-none">
+                  Member
+                </Label>
               </div>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="owner" id="owner" />
-                <Label htmlFor="owner">Owner</Label>
+                <Label htmlFor="owner" className="cursor-pointer select-none">
+                  Owner
+                </Label>
               </div>
             </RadioGroup>
           </div>
           {inviteState?.error && (
-            <p className="text-red-500">{inviteState.error}</p>
+            <p className="text-red-500 text-sm">{inviteState.error}</p>
           )}
           {inviteState?.success && (
-            <p className="text-green-500">{inviteState.success}</p>
+            <p className="text-green-500 text-sm">{inviteState.success}</p>
           )}
           <Button type="submit" disabled={isInvitePending || !isOwner}>
             {isInvitePending ? (
