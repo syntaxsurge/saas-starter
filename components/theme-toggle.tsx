@@ -13,21 +13,15 @@ export function ModeToggle() {
     setMounted(true);
   }, []);
 
+  if (!mounted) return null; // Do not render until mounted
+
   function getCurrentIcon() {
-    if (!mounted) {
-      return <Laptop className="h-4 w-4" />;
-    }
-    // Toggle icon based on current theme: show Sun for light, Moon for dark.
     return theme === "light" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />;
   }
 
   const toggleTheme = () => {
     // Automatically toggle between light and dark theme on click
-    if (theme === "light") {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
+    setTheme(theme === "light" ? "dark" : "light");
   };
 
   return (
