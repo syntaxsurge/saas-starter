@@ -12,7 +12,8 @@
     "db:seed": "npx tsx lib/db/seed.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "db:push": "drizzle-kit generate && drizzle-kit push"
   },
   "dependencies": {
     "@esbuild-kit/core-utils": "^3.3.2",
