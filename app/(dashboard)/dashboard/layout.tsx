@@ -26,6 +26,8 @@ export default function DashboardLayout({
       {/* Sidebar (desktop) */}
       <aside
         className={`
+          hidden
+          lg:flex
           lg:sticky
           top-[68px]
           w-64
@@ -34,10 +36,7 @@ export default function DashboardLayout({
           border-border
           h-[calc(100dvh-68px)]
           overflow-y-auto
-          hidden
-          lg:flex
           flex-col
-          ${isSidebarOpen ? "translate-x-0" : ""}
         `}
       >
         <nav className="p-4">
@@ -92,7 +91,7 @@ export default function DashboardLayout({
 
         {/* Slide-out sidebar for mobile */}
         {isSidebarOpen && (
-          <div
+          <aside
             className={`
               lg:hidden
               fixed
@@ -105,6 +104,7 @@ export default function DashboardLayout({
               border-border
               h-[calc(100dvh-68px)]
               overflow-y-auto
+              flex-col
             `}
           >
             <nav className="p-4">
@@ -125,11 +125,13 @@ export default function DashboardLayout({
                 </Link>
               ))}
             </nav>
-          </div>
+          </aside>
         )}
 
         {/* Main content */}
-        <main className="flex-1 overflow-y-auto p-4">{children}</main>
+        <main className="flex-1 overflow-y-auto p-4">
+          {children}
+        </main>
       </div>
     </div>
   );
