@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { use, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { CircleIcon, Home, LogOut } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,7 +13,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useUser } from "@/lib/auth";
 import { signOut } from "@/app/(login)/actions";
-import { useRouter } from "next/navigation";
+import { Home, LogOut, Menu, CircleIcon } from "lucide-react";
 import { ModeToggle } from "@/components/theme-toggle";
 
 function Header() {
@@ -21,7 +21,8 @@ function Header() {
   const { userPromise } = useUser();
   const user = use(userPromise);
   const router = useRouter();
-
+  const pathname = usePathname();
+  
   async function handleSignOut() {
     await signOut();
     router.refresh();
@@ -31,16 +32,18 @@ function Header() {
   return (
     <header className="border-b border-border bg-background/50 backdrop-blur-md sticky top-0 z-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex items-center space-x-2">
           <CircleIcon className="h-6 w-6 text-orange-500" />
-          <span className="ml-2 text-xl font-semibold text-foreground">
-            ACME
-          </span>
+          <span className="text-xl font-semibold text-foreground">ACME</span>
         </Link>
-        <div className="flex items-center space-x-4">
+        <div className="hidden lg:flex items-center space-x-4">
           <Link
             href="/pricing"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground"
+            className={`text-sm font-medium hover:text-foreground transition-colors ${
+              pathname === "/pricing"
+                ? "text-foreground"
+                : "text-muted-foreground"
+            }`}
           >
             Pricing
           </Link>
@@ -76,12 +79,88 @@ function Header() {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button asChild className="text-sm px-4 py-2 rounded-full">
-              <Link href="/sign-up">Sign Up</Link>
-            </Button>
+            <div className="flex items-center space-x-2">
+              <Button asChild variant="ghost" className="text-sm px-4 py-2 rounded-full">
+                <Link href="/sign-in">Sign In</Link>
+              </Button>
+              <Button asChild className="text-sm px-4 py-2 rounded-full">
+                <Link href="/sign-up">Sign Up</Link>
+              </Button>
+            </div>
           )}
         </div>
+
+        {/* Mobile Menu */}
+        <div className="flex lg:hidden items-center space-x-2">
+          <ModeToggle />
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="text-foreground hover:text-foreground/80 focus:outline-none"
+          >
+            <Menu className="h-6 w-6" />
+            <span className="sr-only">Toggle menu</span>
+          </button>
+        </div>
       </div>
+
+      {/* Mobile Nav - Slide Down */}
+      {isMenuOpen && (
+        <div className="lg:hidden border-t border-border bg-background/90 shadow-sm">
+          <nav className="px-4 py-4 flex flex-col space-y-3">
+            <Link
+              href="/pricing"
+              className={`text-sm font-medium hover:text-foreground transition-colors ${
+                pathname === "/pricing" ? "text-foreground" : "text-muted-foreground"
+              }`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Pricing
+            </Link>
+            {user ? (
+              <>
+                <Link
+                  href="/dashboard"
+                  className="text-sm font-medium hover:text-foreground transition-colors text-muted-foreground"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Dashboard
+                </Link>
+                <form
+                  action={async () => {
+                    await handleSignOut();
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  <button className="text-left text-sm font-medium hover:text-foreground transition-colors text-muted-foreground">
+                    Sign out
+                  </button>
+                </form>
+              </>
+            ) : (
+              <div className="flex flex-col space-y-2">
+                <Link
+                  href="/sign-in"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="w-full text-center"
+                >
+                  <Button variant="ghost" className="w-full text-sm rounded-full">
+                    Sign In
+                  </Button>
+                </Link>
+                <Link
+                  href="/sign-up"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="w-full text-center"
+                >
+                  <Button className="w-full text-sm rounded-full">
+                    Sign Up
+                  </Button>
+                </Link>
+              </div>
+            )}
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
