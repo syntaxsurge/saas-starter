@@ -4,7 +4,7 @@ import { startTransition, useActionState } from 'react'
 
 import { Lock, Trash2, Loader2 } from 'lucide-react'
 
-import { updatePassword, deleteAccount } from '@/app/(login)/actions'
+import { updatePassword, deleteAccount } from '@/app/(auth)/actions'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'

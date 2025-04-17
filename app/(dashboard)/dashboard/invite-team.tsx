@@ -4,7 +4,7 @@ import { use, useActionState } from 'react'
 
 import { Loader2, PlusCircle } from 'lucide-react'
 
-import { inviteTeamMember } from '@/app/(login)/actions'
+import { inviteTeamMember } from '@/app/(auth)/actions'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'

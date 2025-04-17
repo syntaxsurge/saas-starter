@@ -2,7 +2,7 @@
 
 import { useActionState } from 'react'
 
-import { removeTeamMember } from '@/app/(login)/actions'
+import { removeTeamMember } from '@/app/(auth)/actions'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'

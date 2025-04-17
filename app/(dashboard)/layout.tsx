@@ -6,7 +6,7 @@ import { use, useState } from 'react'
 
 import { Home, LogOut, Menu, CircleIcon } from 'lucide-react'
 
-import { signOut } from '@/app/(login)/actions'
+import { signOut } from '@/app/(auth)/actions'
 import { ModeToggle } from '@/components/theme-toggle'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
