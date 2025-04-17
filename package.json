@@ -8,7 +8,7 @@
     "format": "prettier --write .",
     "lint": "npx eslint . --ext .ts,.tsx,.js,.jsx",
     "lint:fix": "npx eslint . --ext .ts,.tsx,.js,.jsx --fix",
-    "lint:all": "npm run lint && npm run lint:fix && npm run format",
+    "lint:all": "npm run lint:fix && npm run lint && npm run format",
     "db:setup": "npx tsx lib/db/setup.ts",
     "db:seed": "npx tsx lib/db/seed.ts",
     "db:generate": "drizzle-kit generate",
